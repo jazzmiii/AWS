@@ -114,6 +114,36 @@ PUT YOUR HIDDEN CONTENT HERE
         docker images(optional)
         docker rmijasonrivers/nagios:latest
      </p>
+    <p>
+        services:
+          campusmgmtsystem:
+            image: your-dockerhub-username/your-app-image:latest   # replace with your app image
+            container_name: campus_app
+            ports:
+              - "7079:8080"
+            depends_on:
+              - mongodb
+        environment:
+            MONGO_URL: "mongodb://mongodb:27017/campusdb"
+
+          mongodb:
+            image: mongo:6.0
+            container_name: campus_mongo
+            restart: always
+            ports:
+              - "27017:27017"
+            volumes:
+              - mongo_data:/data/db
+
+        volumes:
+          mongo_data:
+    </p>
+        <p>
+            FROM tomcat:9.0
+            COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+            EXPOSE 7007
+            CMD ["catalina.sh","run"]
+        </p>
     </div>
 
 </div>
